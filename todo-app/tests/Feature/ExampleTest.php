@@ -2,7 +2,6 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ExampleTest extends TestCase
@@ -15,7 +14,6 @@ class ExampleTest extends TestCase
     public function test_example()
     {
         $response = $this->get('/');
-
         $response->assertStatus(200);
     }
 
@@ -25,20 +23,24 @@ class ExampleTest extends TestCase
             "task_description"=> "Buy egg,milk", "task_status"=> "pending"]);
         $response -> assertStatus(200);
     }
-
     public function test_taskDeletionTest()
     {
-        $response = $this->json('DELETE', '/api/task/del', ["id" => 1]);
-        $response -> assertStatus(200);
+        $response = $this->get('/');
+        $this->json('DELETE', 'api/task/del/4', [])
+             -> assertStatus(200);
     }
     public function test_taskUpdationTest()
     {
-        $response = $this->json('PUT', '/api/task/', ["id" => 2, "task_status"=> "progress"]);
+        $response = $this->json('PUT', '/api/task/', ["id" => 17, "task_status"=> "progress"]);
         $response -> assertStatus(200);
     }
     public function test_taskFetchTest()
     {
-        $response = $this->json('GET', '/api/task/fetch', ["id" => 2]);
+        $response = $this->json('GET', '/api/task/fetch/12',[]);
         $response -> assertStatus(200);
+        $response->assertJsonStructure([
+        '*' => [
+        ]
+    ]);
     }
 }

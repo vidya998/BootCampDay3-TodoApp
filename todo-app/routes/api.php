@@ -19,7 +19,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::get('/task',       [TodoController::class, 'getAllTasks']);
-Route::get('/task/fetch',       [TodoController::class, 'fetchTask']);
+Route::get('/task/fetch/{id}',       [TodoController::class, 'fetchTask']);
 Route::post('/task',       [TodoController::class, 'insertTask']);
 Route::put('/task',       [TodoController::class, 'updateTask']);
-Route::delete('/task/del',     [TodoController::class, 'deleteTask']);
+Route::delete('/task/del/{id}',     [TodoController::class, 'deleteTask']);

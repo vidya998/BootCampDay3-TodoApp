@@ -14,13 +14,12 @@ class CreateTodosTable extends Migration
     public function up()
     {
         Schema::create('todos', function (Blueprint $table) {
-            $table->id('id');
+            $table->id();
             $table->string('task_name');
             $table->text('task_description');
             $table->string('task_status');
         });
     }
-
     /**
      * Reverse the migrations.
      *
